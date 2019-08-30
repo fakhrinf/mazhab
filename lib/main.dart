@@ -24,6 +24,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  var _title = "Sign In";
   bool _loginpage = true;
   double _textlinkpos = 550;
 
@@ -128,9 +129,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget linktext(bool islogin) {
     return Row(
       children: <Widget>[
-        Text((islogin) ? "Belum punya akun?" : "Sudah punya akun?"),
+        Text((islogin) ? "Don't have an account?" : "Already have an account?"),
         FlatButton(
-          padding: EdgeInsets.zero,
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
           onPressed: () {
@@ -138,13 +138,15 @@ class _LoginPageState extends State<LoginPage> {
               if(islogin) {
                 _loginpage = false;
                 _textlinkpos = 610;
+                _title = "Register";
               }else{
                 _loginpage = true;
                 _textlinkpos = 550;
+                _title = "Sign In";
               }
             });
           },
-          child: Text((islogin) ? "Daftar disini" : "Login disini", style: TextStyle(color: Colors.blue)),
+          child: Text((islogin) ? "Register here" : "Login here", style: TextStyle(color: Colors.blue)),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         )
       ],
@@ -192,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         Divider(color: Colors.transparent, height: 10,),
-                        Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 24)),
+                        Text(_title, style: TextStyle(color: Colors.white, fontSize: 24)),
                       ],
                     ),
                   ),
