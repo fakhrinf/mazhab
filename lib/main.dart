@@ -24,6 +24,133 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  bool _loginpage = true;
+  double _textlinkpos = 550;
+
+  Widget loginForm() {
+    return Form(
+      child: Column(
+        children: <Widget>[
+          TextFormField(
+            decoration: InputDecoration(
+              hintText: "Username",
+              contentPadding: EdgeInsets.all(16),
+              filled: true,
+              fillColor: Colors.grey[100],
+              suffixIcon: Icon(Icons.person_outline),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
+
+            ),
+          ),
+          Divider(color: Colors.transparent, height: 10,),
+          TextFormField(
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: "Password",
+              contentPadding: EdgeInsets.all(16),
+              filled: true,
+              fillColor: Colors.grey[100],
+              suffixIcon: Icon(Icons.lock_outline),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
+            ),
+          ),
+          Divider(color: Colors.transparent, height: 10,),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: RaisedButton(
+              padding: EdgeInsets.all(16),
+              color: Colors.green,
+              shape: StadiumBorder(),
+              child: Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 14)),
+              onPressed: () => {},
+            ),
+          )
+        ],
+      )
+    );
+  }
+
+  Widget registerForm() {
+    return Form(
+      child: Column(
+        children: <Widget>[
+          TextFormField(
+            decoration: InputDecoration(
+              hintText: "Username",
+              contentPadding: EdgeInsets.all(16),
+              filled: true,
+              fillColor: Colors.grey[100],
+              suffixIcon: Icon(Icons.person_outline),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
+
+            ),
+          ),
+          Divider(color: Colors.transparent, height: 10,),
+          TextFormField(
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: "Password",
+              contentPadding: EdgeInsets.all(16),
+              filled: true,
+              fillColor: Colors.grey[100],
+              suffixIcon: Icon(Icons.lock_outline),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
+            ),
+          ),
+          Divider(color: Colors.transparent, height: 10,),
+          TextFormField(
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: "Confirm Password",
+              contentPadding: EdgeInsets.all(16),
+              filled: true,
+              fillColor: Colors.grey[100],
+              suffixIcon: Icon(Icons.lock_outline),
+              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
+            ),
+          ),
+          Divider(color: Colors.transparent, height: 10,),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: RaisedButton(
+              padding: EdgeInsets.all(16),
+              color: Colors.green,
+              shape: StadiumBorder(),
+              child: Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: 14)),
+              onPressed: () => {},
+            ),
+          )
+        ],
+      )
+    );
+  }
+
+  Widget linktext(bool islogin) {
+    return Row(
+      children: <Widget>[
+        Text((islogin) ? "Belum punya akun?" : "Sudah punya akun?"),
+        FlatButton(
+          padding: EdgeInsets.zero,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onPressed: () {
+            setState(() {
+              if(islogin) {
+                _loginpage = false;
+                _textlinkpos = 610;
+              }else{
+                _loginpage = true;
+                _textlinkpos = 550;
+              }
+            });
+          },
+          child: Text((islogin) ? "Daftar disini" : "Login disini", style: TextStyle(color: Colors.blue)),
+          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        )
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,65 +214,14 @@ class _LoginPageState extends State<LoginPage> {
                     BoxShadow(color: Colors.grey[300], blurRadius: 30, offset: Offset(0, 10)),
                   ]
                 ),
-                child: Form(
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Username",
-                          contentPadding: EdgeInsets.all(16),
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                          suffixIcon: Icon(Icons.person_outline),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
-
-                        ),
-                      ),
-                      Divider(color: Colors.transparent, height: 10,),
-                      TextFormField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          hintText: "Password",
-                          contentPadding: EdgeInsets.all(16),
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                          suffixIcon: Icon(Icons.lock_outline),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
-                        ),
-                      ),
-                      Divider(color: Colors.transparent, height: 10,),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: RaisedButton(
-                          padding: EdgeInsets.all(16),
-                          color: Colors.green,
-                          shape: StadiumBorder(),
-                          child: Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 14)),
-                          onPressed: () => {},
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                child: (_loginpage) ? loginForm() : registerForm()
               ),
             ),
           ),
           Positioned(
-            top: 560,
+            top: _textlinkpos,
             child: Container(
-              child: Row(
-                children: <Widget>[
-                  Text("Belum punya akun?"),
-                  FlatButton(
-                    padding: EdgeInsets.zero,
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onPressed: () => {},
-                    child: Text("Daftar disini", style: TextStyle(color: Colors.blue)),
-                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  )
-                ],
-              ),
+              child: linktext(_loginpage)
             ),
           ),
         ],
