@@ -8,12 +8,17 @@ class CiriController extends Controller
 {
     //
 
-    public function manageciri()
+    public function addciri()
     {
         # code...
     }
 
-    public function deleteciri()
+    public function editciri($id)
+    {
+        # code...
+    }
+
+    public function deleteciri($id)
     {
         # code...
     }
@@ -23,7 +28,7 @@ class CiriController extends Controller
         # code...
     }
 
-    public function getciribyid()
+    public function getciribyid($id)
     {
         # code...
     }

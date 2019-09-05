@@ -8,17 +8,17 @@ class UserController extends Controller
 {
     //
 
-    public function login()
+    public function login(Request $request)
     { 
         #code...
     }
 
-    public function logout()
+    public function logout($id)
     {
         # code...
     }
 
-    public function updatepassword()
+    public function updatepassword($id)
     {
         # code...
     }

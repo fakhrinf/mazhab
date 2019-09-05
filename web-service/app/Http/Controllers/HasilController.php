@@ -7,12 +7,17 @@ use Illuminate\Http\Request;
 class HasilController extends Controller
 {
     //
-    public function managehasil()
+    public function addhasil()
     {
         # code...
     }
 
-    public function deletehasil()
+    public function edithasil($id)
+    {
+        # code...
+    }
+
+    public function deletehasil($id)
     {
         # code...
     }
@@ -22,7 +27,7 @@ class HasilController extends Controller
         # code...
     }
 
-    public function gethasilbyid()
+    public function gethasilbyid($id)
     {
         # code...
     }

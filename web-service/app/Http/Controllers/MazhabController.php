@@ -8,12 +8,17 @@ class MazhabController extends Controller
 {
     //
 
-    public function managemazhab()
+    public function addmazhab()
     {
         # code...
     }
 
-    function deletemazhab()
+    public function editmazhab($id)
+    {
+        # code...
+    }
+
+    function deletemazhab($id)
     {
         # code...
     }
@@ -23,8 +28,8 @@ class MazhabController extends Controller
         # code...
     }
 
-    public function getmazhabbyid()
+    public function getmazhabbyid($id)
     {
-        # code...
+        return response()->json(['id' => $id, 'mazhab' => 'sample'], 200);
     }
 }
