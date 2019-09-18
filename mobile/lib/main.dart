@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'login.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,222 +12,103 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: LoginPage(),
+      home: Mainmenu(),
     );
   }
 }
 
-class LoginPage extends StatefulWidget {
-
+class Mainmenu extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _MainmenuState createState() => _MainmenuState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-
-  var _title = "Sign In";
-  bool _loginpage = true;
-  double _textlinkpos = 550;
-
-  Widget loginForm() {
-    return Form(
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: "Username",
-              contentPadding: EdgeInsets.all(16),
-              filled: true,
-              fillColor: Colors.grey[100],
-              suffixIcon: Icon(Icons.person_outline),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
-
-            ),
-          ),
-          Divider(color: Colors.transparent, height: 10,),
-          TextFormField(
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: "Password",
-              contentPadding: EdgeInsets.all(16),
-              filled: true,
-              fillColor: Colors.grey[100],
-              suffixIcon: Icon(Icons.lock_outline),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
-            ),
-          ),
-          Divider(color: Colors.transparent, height: 10,),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: RaisedButton(
-              padding: EdgeInsets.all(16),
-              color: Colors.green,
-              shape: StadiumBorder(),
-              child: Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 14)),
-              onPressed: () => {},
-            ),
-          )
-        ],
-      )
-    );
-  }
-
-  Widget registerForm() {
-    return Form(
-      child: Column(
-        children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: "Username",
-              contentPadding: EdgeInsets.all(16),
-              filled: true,
-              fillColor: Colors.grey[100],
-              suffixIcon: Icon(Icons.person_outline),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
-
-            ),
-          ),
-          Divider(color: Colors.transparent, height: 10,),
-          TextFormField(
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: "Password",
-              contentPadding: EdgeInsets.all(16),
-              filled: true,
-              fillColor: Colors.grey[100],
-              suffixIcon: Icon(Icons.lock_outline),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
-            ),
-          ),
-          Divider(color: Colors.transparent, height: 10,),
-          TextFormField(
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: "Confirm Password",
-              contentPadding: EdgeInsets.all(16),
-              filled: true,
-              fillColor: Colors.grey[100],
-              suffixIcon: Icon(Icons.lock_outline),
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
-            ),
-          ),
-          Divider(color: Colors.transparent, height: 10,),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: RaisedButton(
-              padding: EdgeInsets.all(16),
-              color: Colors.green,
-              shape: StadiumBorder(),
-              child: Text("Sign Up", style: TextStyle(color: Colors.white, fontSize: 14)),
-              onPressed: () => {},
-            ),
-          )
-        ],
-      )
-    );
-  }
-
-  Widget linktext(bool islogin) {
-    return Row(
-      children: <Widget>[
-        Text((islogin) ? "Don't have an account?" : "Already have an account?"),
-        FlatButton(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          onPressed: () {
-            setState(() {
-              if(islogin) {
-                _loginpage = false;
-                _textlinkpos = 610;
-                _title = "Register";
-              }else{
-                _loginpage = true;
-                _textlinkpos = 550;
-                _title = "Sign In";
-              }
-            });
-          },
-          child: Text((islogin) ? "Register here" : "Login here", style: TextStyle(color: Colors.blue)),
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        )
-      ],
-    );
-  }
-
+class _MainmenuState extends State<Mainmenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          Container(
-            color: Colors.white,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 400,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      // Where the linear gradient begins and ends
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      // Add one stop for each color. Stops should increase from 0 to 1
-                      stops: [0.1, 0.6, 0.7],
-                      colors: [
-                        // Colors are easy thanks to Flutter's Colors class.
-                        Colors.green[200],
-                        Colors.green[500],
-                        Colors.green[600],
-                      ],
-                    ),
+      backgroundColor: Colors.grey[100],
+      appBar: AppBar(
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: 100,
+                color: Colors.green,
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Image.asset("assets/img/search.png"),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 18.0),
+                        child: Text("CEK MAZHAB!", style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold)),
+                      )
+                    ],
                   ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                            width: 150,
-                            height: 150,
-                            child: CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 16,
-                          ),
-                        ),
-                        Divider(color: Colors.transparent, height: 10,),
-                        Text(_title, style: TextStyle(color: Colors.white, fontSize: 24)),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Positioned(
-            top: 330,
-            left: MediaQuery.of(context).size.width * 0.05,
-            child: Center(
-              child: Container(
-                padding: EdgeInsets.all(16),
-                width: MediaQuery.of(context).size.width * 0.9,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(color: Colors.grey[300], blurRadius: 30, offset: Offset(0, 10)),
-                  ]
                 ),
-                child: (_loginpage) ? loginForm() : registerForm()
               ),
-            ),
+              Container(
+                padding: EdgeInsets.all(32),
+                child: Column(
+                  children: <Widget>[
+                    RaisedButton(
+                      color: Colors.white,
+                      padding: EdgeInsets.all(16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      onPressed: () {},
+                      child: Row(
+                        children: <Widget>[
+                          Image.asset("assets/img/konsultasi.png"),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 18.0),
+                            child: Text("Konsultasi", style: TextStyle(fontSize: 24),),
+                          )
+                        ],
+                      ),
+                    ),
+                    Divider(height: 20, color: Colors.transparent,),
+                    RaisedButton(
+                      color: Colors.white,
+                      padding: EdgeInsets.all(16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      onPressed: () {},
+                      child: Row(
+                        children: <Widget>[
+                          Image.asset("assets/img/about.png"),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 18.0),
+                            child: Text("Info", style: TextStyle(fontSize: 24),),
+                          )
+                        ],
+                      ),
+                    ),
+                    Divider(height: 20, color: Colors.transparent,),
+                    RaisedButton(
+                      color: Colors.white,
+                      padding: EdgeInsets.all(16),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      onPressed: () {
+                        Navigator.push(context, new MaterialPageRoute(builder: (context) => LoginPage()));
+                      },
+                      child: Row(
+                        children: <Widget>[
+                          Image.asset("assets/img/login.png"),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 18.0),
+                            child: Text("Login", style: TextStyle(fontSize: 24),),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
-          Positioned(
-            top: _textlinkpos,
-            child: Container(
-              child: linktext(_loginpage)
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
