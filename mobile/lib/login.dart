@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mazhab/provider/mainprovider.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -12,7 +14,10 @@ class _LoginPageState extends State<LoginPage> {
   bool _loginpage = true;
   double _textlinkpos = 550;
 
-  Widget loginForm() {
+  Widget loginForm(BuildContext context) {
+
+    final provider = Provider.of<MainProvider>(context);
+
     return Form(
       child: Column(
         children: <Widget>[
@@ -47,7 +52,11 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.green,
               shape: StadiumBorder(),
               child: Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 14)),
-              onPressed: () => {},
+              onPressed: () {
+                provider.setIsLog(true);
+                provider.update();
+                Navigator.pop(context);
+              },
             ),
           )
         ],
@@ -139,6 +148,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -201,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
                     BoxShadow(color: Colors.grey[300], blurRadius: 30, offset: Offset(0, 10)),
                   ]
                 ),
-                child: (_loginpage) ? loginForm() : registerForm()
+                child: (_loginpage) ? loginForm(context) : registerForm()
               ),
             ),
           ),
