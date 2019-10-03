@@ -5,6 +5,7 @@ import 'package:mazhab/login.dart';
 import 'package:mazhab/mazhab.dart';
 import 'package:mazhab/provider/mainprovider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(MyApp());
 
@@ -33,6 +34,23 @@ class Mainmenu extends StatefulWidget {
 }
 
 class _MainmenuState extends State<Mainmenu> {
+
+  Future<bool> checklog() async {
+    SharedPreferences pref = await SharedPreferences.getInstance(); 
+    return pref.getBool("islog");
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checklog().then((res) {
+      final provider = Provider.of<MainProvider>(context);
+      provider.setIsLog(res);
+      provider.update();
+      print(res);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +205,11 @@ class _MainmenuState extends State<Mainmenu> {
                             content: Text("Are you sure want to logout?"),
                             actions: <Widget>[
                               FlatButton(child: Text("Cancel"), onPressed: () => Navigator.pop(context)),
-                              FlatButton(child: Text("Ok"), onPressed: () {
+                              FlatButton(child: Text("Ok"), onPressed: () async {
+                                SharedPreferences pref = await SharedPreferences.getInstance();
+                                
+                                pref.clear();
+
                                 provider.setIsLog(false);
                                 provider.update();
                                 Navigator.pop(context);

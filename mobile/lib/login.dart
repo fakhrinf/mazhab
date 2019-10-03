@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mazhab/provider/mainprovider.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
 class LoginPage extends StatefulWidget {
 
@@ -13,12 +16,16 @@ class _LoginPageState extends State<LoginPage> {
   var _title = "Sign In";
   bool _loginpage = true;
   double _textlinkpos = 550;
+  final _loginkey = GlobalKey<FormState>();
+  String _username;
+  String _password;
 
   Widget loginForm(BuildContext context) {
 
     final provider = Provider.of<MainProvider>(context);
 
     return Form(
+      key: _loginkey,
       child: Column(
         children: <Widget>[
           TextFormField(
@@ -31,6 +38,14 @@ class _LoginPageState extends State<LoginPage> {
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
 
             ),
+            validator: (val) {
+              if(val.isEmpty) {
+                return "Username tidak boleh kosong";
+              }
+            },
+            onSaved: (val) {
+              setState(() => _username = val);
+            },
           ),
           Divider(color: Colors.transparent, height: 10,),
           TextFormField(
@@ -43,6 +58,14 @@ class _LoginPageState extends State<LoginPage> {
               suffixIcon: Icon(Icons.lock_outline),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(32), borderSide: BorderSide(color: Colors.grey[200], width: 1))
             ),
+            validator: (val) {
+              if(val.isEmpty){
+                return "Password tidak boleh kosong";
+              }
+            },
+            onSaved: (val) {
+              setState(() => _password = val);
+            },
           ),
           Divider(color: Colors.transparent, height: 10,),
           SizedBox(
@@ -52,10 +75,39 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.green,
               shape: StadiumBorder(),
               child: Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 14)),
-              onPressed: () {
-                provider.setIsLog(true);
-                provider.update();
-                Navigator.pop(context);
+              onPressed: () async {
+
+                if(_loginkey.currentState.validate()) {
+                  _loginkey.currentState.save();
+                  print("$_username: $_password");
+                  var response = await http.post("http://192.168.10.59:8000/login",body: {'username': _username, 'password': _password});
+
+                  var res = convert.jsonDecode(response.body);
+                  if(response.statusCode == 200) {  
+                    SharedPreferences pref = await SharedPreferences.getInstance();
+                    pref.setBool("islog", true);
+                    pref.setInt("id", res['data'][0]['id']);
+                    pref.setString("username", res['data'][0]['username']);
+
+                    provider.setIsLog(true);
+                    provider.update();
+                    Navigator.pop(context);
+                  }else{
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text("Kode: ${response.statusCode}"),
+                        content: Text(res['message']),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text("Ok"),
+                            onPressed: () => Navigator.pop(context),
+                          )
+                        ],
+                      )
+                    );
+                  }
+                }
               },
             ),
           )
