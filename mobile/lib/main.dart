@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mazhab/about.dart';
+import 'package:mazhab/category.dart';
 import 'package:mazhab/ciriciri.dart';
 import 'package:mazhab/login.dart';
 import 'package:mazhab/mazhab.dart';
@@ -100,13 +101,13 @@ class _MainmenuState extends State<Mainmenu> {
                     color: Colors.white,
                     padding: EdgeInsets.all(16),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Mazhab())),
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Category())),
                     child: Row(
                       children: <Widget>[
                         Image.asset("assets/img/mazhab.png"),
                         Padding(
                           padding: const EdgeInsets.only(left: 18.0),
-                          child: Text("Category", style: TextStyle(fontSize: 24),),
+                          child: Text("Kategori", style: TextStyle(fontSize: 24),),
                         )
                       ],
                     ),

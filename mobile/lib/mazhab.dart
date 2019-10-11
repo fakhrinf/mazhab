@@ -37,7 +37,7 @@ class _MazhabState extends State<Mazhab> {
               leading: Icon(Icons.list),
               subtitle: Text("CODE"),
               trailing: Icon(Icons.arrow_right),
-              onTap: () {},
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MazhabForm(title: "Edit Mazhab"))),
             ),
           )
         ),

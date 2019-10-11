@@ -35,7 +35,7 @@ class _CiriciriState extends State<Ciriciri> {
               leading: Icon(Icons.list),
               subtitle: Text("CODE"),
               trailing: Icon(Icons.arrow_right),
-              onTap: () {},
+              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => CiriciriForm(title: "Edit Ciri-ciri"))),
             ),
           )
         ),
