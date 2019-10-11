@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import 'helper/api.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                 if(_loginkey.currentState.validate()) {
                   _loginkey.currentState.save();
                   print("$_username: $_password");
-                  var response = await http.post("http://192.168.10.59:8000/login",body: {'username': _username, 'password': _password});
+                  var response = await http.post(Api.url("login"),body: {'username': _username, 'password': _password});
 
                   var res = convert.jsonDecode(response.body);
                   if(response.statusCode == 200) {  
