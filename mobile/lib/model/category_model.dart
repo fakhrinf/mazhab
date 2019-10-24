@@ -44,27 +44,27 @@ class CategoryModel {
 
   static Future<String> addCategory(String category) async {
     final response = await http.post(Api.url('category'), body: {
-      category: category
+      'category': category
     });
     
     if(response.statusCode == 200) {
       final data = convert.jsonDecode(response.body);
       return data['message'];
     }else{
-      return "Failed to add data, status code: ${response.statusCode}";
+      throw Exception("Failed to add data, status code: ${response.statusCode}");
     }
   }
 
   static Future<String> editCategory(int id, String category) async {
     final response = await http.put(Api.url('category/$id'), body: {
-      category: category
+      'category': category
     });
     
     if(response.statusCode == 200) {
       final data = convert.jsonDecode(response.body);
       return data['message'];
     }else{
-      return "Failed to add data, status code: ${response.statusCode}";
+      throw Exception("Failed to edit data, status code: ${response.statusCode}");
     }
   } 
 
@@ -74,7 +74,7 @@ class CategoryModel {
       final data = convert.jsonDecode(response.body);
       return data['message'];
     }else{
-      return "Failed to add data, status code: ${response.statusCode}";
+      throw Exception("Failed to delete data, status code: ${response.statusCode}");
     }
   }
 }

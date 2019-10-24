@@ -1,4 +1,7 @@
 com.example.mazhab
 drawable launch_background
+drawable toast_bg
+id text
+layout toast_custom
 mipmap ic_launcher
 style LaunchTheme

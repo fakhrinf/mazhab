@@ -38,7 +38,8 @@ class _MainmenuState extends State<Mainmenu> {
 
   Future<bool> checklog() async {
     SharedPreferences pref = await SharedPreferences.getInstance(); 
-    return pref.getBool("islog");
+    bool res = pref.getBool("islog");
+    return (res == null) ? false : res;
   }
 
   @override
@@ -47,9 +48,19 @@ class _MainmenuState extends State<Mainmenu> {
     super.initState();
     checklog().then((res) {
       final provider = Provider.of<MainProvider>(context);
-      provider.setIsLog(res);
+      if(res != null || res != false) {
+        provider.setIsLog(res);
+        provider.update();
+        print(res);
+      }else{
+        provider.setIsLog(false);
+        provider.update();
+      }
+    }).catchError((e) {
+      final provider = Provider.of<MainProvider>(context);
+      print(e.toString());
+      provider.setIsLog(false);
       provider.update();
-      print(res);
     });
   }
 

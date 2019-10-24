@@ -5,6 +5,7 @@ INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/m
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/main/AndroidManifest.xml:1:1-33:12
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/main/AndroidManifest.xml:1:1-33:12
 MERGED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/main/AndroidManifest.xml:1:1-33:12
+MERGED from [:fluttertoast] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/fluttertoast/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
 MERGED from [:shared_preferences] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/shared_preferences/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/debug/AndroidManifest.xml:1:1-7:12
@@ -65,6 +66,8 @@ uses-sdk
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/main/AndroidManifest.xml
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/main/AndroidManifest.xml
+MERGED from [:fluttertoast] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/fluttertoast/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:fluttertoast] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/fluttertoast/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/shared_preferences/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/shared_preferences/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/debug/AndroidManifest.xml
