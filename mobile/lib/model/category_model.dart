@@ -47,12 +47,11 @@ class CategoryModel {
       category: category
     });
     
-    final data = convert.jsonDecode(response.body);
-    
     if(response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
       return data['message'];
     }else{
-      throw Exception(data['message']);
+      return "Failed to add data, status code: ${response.statusCode}";
     }
   }
 
@@ -61,21 +60,21 @@ class CategoryModel {
       category: category
     });
     
-    final data = convert.jsonDecode(response.body);
-    
     if(response.statusCode == 200) {
+      final data = convert.jsonDecode(response.body);
       return data['message'];
     }else{
-      throw Exception(data['message']);
+      return "Failed to add data, status code: ${response.statusCode}";
     }
   } 
 
-  static Future<bool> deleteCategory(int id) async {
+  static Future<String> deleteCategory(int id) async {
     final response = await http.delete(Api.url("category/$id"));
     if(response.statusCode == 200) {
-      return true;
+      final data = convert.jsonDecode(response.body);
+      return data['message'];
     }else{
-      return false;
+      return "Failed to add data, status code: ${response.statusCode}";
     }
   }
 }
