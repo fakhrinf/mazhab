@@ -36,3 +36,9 @@ $router->get('hasil/{id}', ['as' => 'hasil_id', 'uses' => 'HasilController@getal
 $router->post('hasil', ['as' => 'hasil_add', 'uses' => 'HasilController@addhasil']);
 $router->put('hasil/{id}', ['as' => 'hasil_edit', 'uses' => 'HasilController@edithasil']);
 $router->delete('hasil/{id}', ['as' => 'hasil_delete', 'uses' => 'HasilController@deletehasil']);
+
+$router->get('category', ['as' => 'category', 'uses' => 'CategoryController@getallcategories']);
+$router->get('category/{id}', ['as' => 'category_id', 'uses' => 'CategoryController@getcategoriesbyid']);
+$router->post('category', ['as' => 'category_add', 'uses' => 'CategoryController@addcategories']);
+$router->put('category/{id}', ['as' => 'category_edit', 'uses' => 'CategoryController@editcategories']);
+$router->delete('category/{id}', ['as' => 'category_delete', 'uses' => 'CategoryController@deletecategories']);
