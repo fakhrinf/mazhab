@@ -1,4 +1,4 @@
-#Fri Oct 25 01:47:37 WIB 2019
+#Fri Oct 25 02:13:49 WIB 2019
 base.0=/Users/fakhrinf/Development/Mobile/mazhab/mobile/build/app/intermediates/transforms/dexMerger/debug/0
 path.0=classes.dex
 renamed.0=classes.dex
