@@ -15,8 +15,9 @@ class CreateCiricirimodelsTable extends Migration
     {
         Schema::create('ciriciris', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('ciriciri');
+            $table->text('ciriciri');
             $table->string('kode_ciriciri');
+            $table->integer('category_id');
             $table->timestamps();
         });
     }

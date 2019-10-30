@@ -17,8 +17,6 @@ class CreateCiriMazhabmodelsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('ciri_id');
             $table->integer('mazhab_id');
-            $table->text('penjelasan');
-            $table->integer('category_id');
             $table->timestamps();
         });
     }

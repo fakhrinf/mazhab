@@ -12,5 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call('UserSeed');
+        $this->call('CategorySeeder');
+        $this->call('CiriCiriSeeder');
+        $this->call('MazhabSeeder');
     }
 }
