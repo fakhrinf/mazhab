@@ -1,10 +1,12 @@
+import 'package:mazhab/model/mazhab_model.dart';
+
 class TagSearchService {
-  static Future<List> getSuggestions(String query) async {
+  static Future<List> getSuggestions(List<MazhabModel> mazhab, String query) async {
     await Future.delayed(Duration(milliseconds: 400), null);
     List<dynamic> tagList = <dynamic>[];
-    tagList.add({'name': "Flutter", 'value': 1});
-    tagList.add({'name': "HummingBird", 'value': 2});
-    tagList.add({'name': "Dart", 'value': 3});
+    mazhab.forEach((data) {
+      tagList.add({'name' : data.mazhab, 'value': data.id});
+    });
     List<dynamic> filteredTagList = <dynamic>[];
     if (query.isNotEmpty) {
       filteredTagList.add({'name': query, 'value': 0});

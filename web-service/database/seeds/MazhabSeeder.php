@@ -13,20 +13,20 @@ class MazhabSeeder extends Seeder
     {
         DB::table('mazhabs')->insert([
             [
-                'mazhab' => "M001",
-                'kode_mazhab' => "Hanafi"
+                'mazhab' => "Hanafi",
+                'kode_mazhab' => "M001"
             ],
             [
-                'mazhab' => "M002",
-                'kode_mazhab' => "Hambali"
+                'mazhab' => "Hambali",
+                'kode_mazhab' => "M002"
             ],
             [
-                'mazhab' => "M003",
-                'kode_mazhab' => "Maliki"
+                'mazhab' => "Maliki",
+                'kode_mazhab' => "M003"
             ],
             [
-                'mazhab' => "M004",
-                'kode_mazhab' => "Syafi'i"
+                'mazhab' => "Syafi'i",
+                'kode_mazhab' => "M004"
             ],
         ]);
     }

@@ -1,3 +1,4 @@
+import 'package:direct_select/direct_select.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tagging/flutter_tagging.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -146,6 +147,7 @@ class CiriciriForm extends StatefulWidget {
 class _CiriciriFormState extends State<CiriciriForm> {
 
   final _formKey = GlobalKey<FormState>();
+  int categoryindex = 0;
 
   Widget _buildAddButton() {
     return Container(
@@ -196,17 +198,55 @@ class _CiriciriFormState extends State<CiriciriForm> {
                   ),
                 ),
                 Divider(height: 10, color: Colors.transparent),
-                
-                //Category selection
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(left: 10.0),
+                  child: Text(
+                    "Kategori",
+                    style: TextStyle(
+                        color: Colors.grey, fontWeight: FontWeight.w500),
+                  ),
+                ),
+                DirectSelect(
+                  child: Card(
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.all(16),
+                          child: Text(widget.categorylist[categoryindex].category),
+                          alignment: Alignment.center,
+                        ),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Icon(Icons.arrow_drop_down),
+                        )
+                      ],
+                    ),
+                  ),
+                  itemExtent: 65.0,
+                  selectedIndex: categoryindex,
+                  items: widget.categorylist.map((data) => SizedBox(
+                    height: 60,
+                    child: Padding(child: Container(
+                      child: Text(data.category),
+                      alignment: Alignment.center,
+                    ), padding: EdgeInsets.all(16)),
+                  )).toList(),
+                  onSelectedItemChanged: (index) {
+                    setState(() {
+                      categoryindex = index;
+                    });
+                  },
+                ),
                 
                 Divider(height: 10, color: Colors.transparent),
                 FlutterTagging(
                   textFieldDecoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: "Tags",
-                      labelText: "Enter tags"),
+                      hintText: "Mazhab",
+                      labelText: "Masukan Mazhab"),
                   addButtonWidget: _buildAddButton(),
-                  chipsColor: Colors.pinkAccent,
+                  chipsColor: Colors.blueAccent,
                   chipsFontColor: Colors.white,
                   deleteIcon: Icon(Icons.cancel,color: Colors.white),
                   chipsPadding: EdgeInsets.all(2.0),
@@ -214,9 +254,11 @@ class _CiriciriFormState extends State<CiriciriForm> {
                   chipsSpacing: 5.0,
                   chipsFontFamily: 'helvetica_neue_light',
                   suggestionsCallback: (pattern) async {
-                    return await TagSearchService.getSuggestions(pattern);
+                    return await TagSearchService.getSuggestions(widget.mazhablist, pattern);
                   },
-                  onChanged: (result) {},
+                  onChanged: (result) {
+                    print("TAGRESULT: $result");
+                  },
                 ),
                 Container(
                   width: double.infinity,

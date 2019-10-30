@@ -7,6 +7,7 @@ INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/m
 MERGED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/main/AndroidManifest.xml:1:1-33:12
 MERGED from [:fluttertoast] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/fluttertoast/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
 MERGED from [:shared_preferences] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/shared_preferences/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_keyboard_visibility] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/flutter_keyboard_visibility/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/debug/AndroidManifest.xml:1:1-7:12
@@ -70,6 +71,8 @@ MERGED from [:fluttertoast] /Users/fakhrinf/Development/Mobile/mazhab/mobile/bui
 MERGED from [:fluttertoast] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/fluttertoast/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/shared_preferences/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/shared_preferences/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_keyboard_visibility] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/flutter_keyboard_visibility/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_keyboard_visibility] /Users/fakhrinf/Development/Mobile/mazhab/mobile/build/flutter_keyboard_visibility/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/debug/AndroidManifest.xml
 INJECTED from /Users/fakhrinf/Development/Mobile/mazhab/mobile/android/app/src/debug/AndroidManifest.xml
 	android:targetSdkVersion
