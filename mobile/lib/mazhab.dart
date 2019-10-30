@@ -64,10 +64,16 @@ class _MazhabState extends State<Mazhab> {
             confirmDismiss: (direction) async {
               final bool res = Utils.alert(context, "Warning!", "Are you sure want to delete this data?", [
                 FlatButton(child: Text("Ok"), onPressed: () {
-                  MazhabModel.deleteMazhab(listmazhab[i].id);
-                  listmazhab.removeAt(i);
-                  Navigator.pop(context, true);
-                  getData();
+                  MazhabModel.deleteMazhab(listmazhab[i].id).then((res) {
+                    Fluttertoast.showToast(msg: res);
+                    listmazhab.removeAt(i);
+                    Navigator.pop(context, true);
+                    getData();
+                  }).catchError((e) {
+                    Utils.alert(context, "Warning!", e.toString(), [
+                      FlatButton(child: Text("Ok"), onPressed: () => Navigator.pop(context))
+                    ]);
+                  });
                 }),
                 FlatButton(child: Text("Cancel"), onPressed: () => Navigator.pop(context, false))
               ]);
