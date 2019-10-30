@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call('CategorySeeder');
         $this->call('CiriCiriSeeder');
         $this->call('MazhabSeeder');
+        $this->call('CiriMazhabSeeder');
     }
 }
