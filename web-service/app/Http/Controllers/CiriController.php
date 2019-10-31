@@ -15,13 +15,27 @@ class CiriController extends Controller
         try {
 
             $kode = $request->kode;
-            $ciri = $request->ciriciri;
+            $ciri = $request->ciri;
+            $categoryid = $request->categoryid;
+            $mazhabid = $request->mazhabid;
+            $mazhabid = explode(',', $mazhabid);
 
             $data = new CiriciriModel();
             $data->ciriciri = $ciri;
-            $data->kode_ciri = $kode;
+            $data->kode_ciriciri = $kode;
+            $data->category_id = $categoryid;
 
             $data->save();
+
+            $id = $data->id;
+
+            foreach ($mazhabid as $i => $d) {
+                $cmz = new CiriMazhabModel();
+                $cmz->ciri_id = $id;
+                $cmz->mazhab_id = $d;
+
+                $cmz->save();
+            }
 
             return response()->json(['message' => "Ciri with id:{$id} added."], 200);
 
@@ -35,7 +49,10 @@ class CiriController extends Controller
         try {
 
             $kode = $request->kode;
-            $ciri = $request->ciriciri;
+            $ciri = $request->ciri;
+            $categoryid = $request->categoryid;
+            $mazhabid = $request->mazhabid;
+            $mazhabid = explode(',', $mazhabid);
 
             $data = CiriciriModel::find($id);
 
@@ -43,9 +60,19 @@ class CiriController extends Controller
                 return response()->json(['message' => "data not found."], 404);
             }else{
                 $data->ciriciri = $ciri;
-                $data->kode_ciri = $kode;
+                $data->kode_ciriciri = $kode;
+                $data->categoryid = $categoryid;
     
                 $data->save();
+
+                $cirimazhab = CiriMazhabModel::where('ciri_id', $id)->delete();
+                foreach ($mazhabid as $i => $d) {
+                    $cmz = new CiriMazhabModel();
+                    $cmz->ciri_id = $id;
+                    $cmz->mazhab_id = $d;
+
+                    $cmz->save();
+                }               
     
                 return response()->json(['message' => "Ciri with id:{$id} updated."], 200);
             }
@@ -64,7 +91,7 @@ class CiriController extends Controller
                 return response()->json(['message' => "data not found."], 404);
             }else{
                 $ciri->delete();
-                $cirimazhab = CiriMazhab::where('ciri_id', $id)->delete();
+                $cirimazhab = CiriMazhabModel::where('ciri_id', $id)->delete();
 
                 return response()->json(['message' => "Ciri with id:{$id} deleted."], 200);
             }
