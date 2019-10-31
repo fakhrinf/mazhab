@@ -137,8 +137,9 @@ class CiriciriForm extends StatefulWidget {
   final String title;
   final List<MazhabModel> mazhablist;
   final List<CategoryModel> categorylist;
+  final CiriciriModel ciriciri;
 
-  CiriciriForm({Key key, @required this.title, @required this.mazhablist, @required this.categorylist}) : super(key: key);
+  CiriciriForm({Key key, @required this.title, @required this.mazhablist, @required this.categorylist, this.ciriciri}) : super(key: key);
 
   @override
   _CiriciriFormState createState() => _CiriciriFormState();
@@ -148,6 +149,11 @@ class _CiriciriFormState extends State<CiriciriForm> {
 
   final _formKey = GlobalKey<FormState>();
   int categoryindex = 0;
+
+  String _kodeciri;
+  String _ciri;
+  int _categoryid;
+  String _mazhabid;
 
   Widget _buildAddButton() {
     return Container(
@@ -190,12 +196,16 @@ class _CiriciriFormState extends State<CiriciriForm> {
                   decoration: InputDecoration(
                     labelText: "Kode Ciri-ciri"
                   ),
+                  validator: (value) => (value.isEmpty) ? "Kode is required!" : null,
+                  onSaved: (value) => setState(() => _kodeciri = value),
                 ),
                 Divider(height: 10, color: Colors.transparent),
                 TextFormField(
                   decoration: InputDecoration(
-                    labelText: "Ciri-Ciri"
+                    labelText: "Ciri-Ciri",
                   ),
+                  validator: (value) => (value.isEmpty) ? "Ciri-ciri is required" : null,
+                  onSaved: (value) => setState(() => _ciri = value),
                 ),
                 Divider(height: 10, color: Colors.transparent),
                 Container(
@@ -235,6 +245,7 @@ class _CiriciriFormState extends State<CiriciriForm> {
                   onSelectedItemChanged: (index) {
                     setState(() {
                       categoryindex = index;
+                      _categoryid = widget.categorylist[categoryindex].id;
                     });
                   },
                 ),
@@ -258,12 +269,37 @@ class _CiriciriFormState extends State<CiriciriForm> {
                   },
                   onChanged: (result) {
                     print("TAGRESULT: $result");
+                    // tag result convert to implode string.
                   },
                 ),
                 Container(
                   width: double.infinity,
                   child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if(_formKey.currentState.validate()) {
+                        _formKey.currentState.save();
+
+                        if(widget.ciriciri == null){
+                          CiriciriModel.addCiriCiri(_kodeciri, _ciri, _categoryid, _mazhabid).then((res) {
+                            Fluttertoast.showToast(msg: res);
+                            Navigator.pop(context, true);
+                          }).catchError((e) {
+                            Utils.alert(context, "Warning!", e.toString(), [
+                              FlatButton(child: Text("Ok"), onPressed: () => Navigator.pop(context))
+                            ]);
+                          });
+                        }else{
+                          CiriciriModel.editCiriCiri(widget.ciriciri.id, _kodeciri, _ciri, _categoryid, _mazhabid).then((res) {
+                            Fluttertoast.showToast(msg: res);
+                            Navigator.pop(context, true);
+                          }).catchError((e) {
+                            Utils.alert(context, "Warning!", e.toString(), [
+                              FlatButton(child: Text("Ok"), onPressed: () => Navigator.pop(context))
+                            ]);
+                          });
+                        }
+                      }
+                    },
                     color: Colors.green,
                     child: Text("SIMPAN", style: TextStyle(color: Colors.white)),
                   ),
