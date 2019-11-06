@@ -124,4 +124,28 @@ class CiriController extends Controller
             return response()->json(['message' => $e->getMessage()], 400);
         }
     }
+
+    public function getallcirimazhab()
+    {
+        try {
+            $data = CiriMazhabModel::all();
+            return response()->json(['data' => $data], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+    }
+
+    public function getcirimazhabbyid($ciriid, $mazhabid)
+    {
+        try {
+            if($ciriid == 0) {
+                $data = CiriMazhabModel::where('mazhab_id', $mazhabid)->get();
+            }else{
+                $data = CiriMazhabModel::where('ciri_id', $ciriid)->where('mazhab_id', $mazhabid)->get();
+            }
+            return response()->json(['data' => $data], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+    }
 }
