@@ -4,7 +4,7 @@ import 'package:mazhab/model/cirimazhab_model.dart';
 
 class NaiveBayes {
   
-  static Future<Map<dynamic, dynamic>> calculate(List<int> ciriciri_id) async {
+  static Future<Map<dynamic, List<dynamic>>> calculate(List<int> ciriciri_id) async {
 
     var selected_mazhab = new List<dynamic>();
     List<MazhabModel> mazhab = await MazhabModel.getAllMazhab();
@@ -55,7 +55,7 @@ class NaiveBayes {
       print("FINAL: $prfinal");
     }
 
-    return {'pfinal': pfinal, 'prfinal': prfinal};
+    return {'mazhab': mazhab, 'pfinal': pfinal, 'prfinal': prfinal};
   }
 
 }
