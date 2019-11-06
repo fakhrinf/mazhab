@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\CategoryModel;
+use App\CiriciriModel;
 
 class CategoryController extends Controller
 {
@@ -13,6 +14,21 @@ class CategoryController extends Controller
         try {
             $data = CategoryModel::all();
             return response()->json(['data' => $data], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 400);
+        }
+    }
+
+    public function getallcategorieswithciries(Request $request)
+    {
+        $response = array();
+        try {
+            $data = CategoryModel::all();
+            foreach ($data as $v) {
+                $res = CiriciriModel::where('category_id', $v->id)->get();
+                array_push($response, ['category' => $v->category, 'ciri' => $res]);
+            }
+            return response()->json(['data' => $response], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
         }
