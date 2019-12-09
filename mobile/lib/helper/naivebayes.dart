@@ -6,7 +6,7 @@ class NaiveBayes {
   
   static Future<Map<dynamic, List<dynamic>>> calculate(List<int> ciriciri_id) async {
 
-    var selected_mazhab = new List<dynamic>();
+    var selected_ciri = new List<dynamic>();
     List<MazhabModel> mazhab = await MazhabModel.getAllMazhab();
     List<CiriciriModel> ciriciri = await CiriciriModel.getCiriCiri();
 
@@ -31,6 +31,7 @@ class NaiveBayes {
         for (var i = 0; i < ciriciri_id.length; i++) {
           List<CiriMazhabModel> pivot = await CiriMazhabModel.getCiriMazhab_byid(ciriciri_id[i], mazhab[mi].id);
           if(pivot.length != 0) {
+            selected_ciri.add(pivot);
             nc.add({mi: 1.0}); 
             ncc[mi] += 1;
           }else{
@@ -55,7 +56,7 @@ class NaiveBayes {
       print("FINAL: $prfinal");
     }
 
-    return {'mazhab': mazhab, 'pfinal': pfinal, 'prfinal': prfinal};
+    return {'mazhab': mazhab, 'pfinal': pfinal, 'prfinal': prfinal, 'selected': selected_ciri};
   }
 
 }

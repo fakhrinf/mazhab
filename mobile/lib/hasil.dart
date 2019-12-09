@@ -17,7 +17,7 @@ class _HasilState extends State<Hasil> {
     return Scaffold(
       appBar: AppBar(title: Text("Hasil")),
       body: Container(
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Table(
               columnWidths: {
@@ -80,6 +80,26 @@ class _HasilState extends State<Hasil> {
                 );
               }).toList(),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("* Presentasi kepercayaan digunakan jika terdapat mazhab dengan nilai probabilitas yang sama", style: TextStyle(fontSize: 12, color: Colors.black45)),
+            ),
+            Divider(height: 10, color: Colors.black45),
+            Container(child: Text("Penjelasan ciri-ciri terpilih", style: TextStyle(color: Colors.black87, fontSize: 24)), alignment: Alignment.center),
+            Divider(height: 30, color: Colors.transparent),
+            Table(
+              columnWidths: {
+                0 : FlexColumnWidth(6),
+                1 : FlexColumnWidth(4),
+              },
+              border: TableBorder.all(color: Colors.black87, width: 1),
+              children: [
+                TableRow(children: [
+                  TableCell(child: Padding(padding: EdgeInsets.all(8), child: Text("Ciri-ciri"))),
+                  TableCell(child: Padding(padding: EdgeInsets.all(8), child: Text("Mazhab")))
+                ])
+              ],
+            )
           ],
         ),
       ),
