@@ -1,19 +1,19 @@
 # Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-.DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
+/mobile/*.class
+/mobile/*.log
+/mobile/*.pyc
+/mobile/*.swp
+/mobile/.DS_Store
+/mobile/.atom/
+/mobile/.buildlog/
+/mobile/.history
+/mobile/.svn/
 
 # IntelliJ related
-*.iml
-*.ipr
-*.iws
-.idea/
+/mobile/*.iml
+/mobile/*.ipr
+/mobile/*.iws
+/mobile/.idea/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -21,52 +21,58 @@
 #.vscode/
 
 # Flutter/Dart/Pub related
-**/doc/api/
-.dart_tool/
-.flutter-plugins
-.packages
-.pub-cache/
-.pub/
-/build/
+/mobile/doc/api/
+/mobile/.dart_tool/
+/mobile/.flutter-plugins
+/mobile/.packages
+/mobile/.pub-cache/
+/mobile/.pub/
+/mobile/build/
 
 # Android related
-**/android/**/gradle-wrapper.jar
-**/android/.gradle
-**/android/captures/
-**/android/gradlew
-**/android/gradlew.bat
-**/android/local.properties
-**/android/**/GeneratedPluginRegistrant.java
+/mobile/android/**/gradle-wrapper.jar
+/mobile/android/.gradle
+/mobile/android/captures/
+/mobile/android/gradlew
+/mobile/android/gradlew.bat
+/mobile/android/local.properties
+/mobile/android/**/GeneratedPluginRegistrant.java
 
 # iOS/XCode related
-**/ios/**/*.mode1v3
-**/ios/**/*.mode2v3
-**/ios/**/*.moved-aside
-**/ios/**/*.pbxuser
-**/ios/**/*.perspectivev3
-**/ios/**/*sync/
-**/ios/**/.sconsign.dblite
-**/ios/**/.tags*
-**/ios/**/.vagrant/
-**/ios/**/DerivedData/
-**/ios/**/Icon?
-**/ios/**/Pods/
-**/ios/**/.symlinks/
-**/ios/**/profile
-**/ios/**/xcuserdata
-**/ios/.generated/
-**/ios/Flutter/App.framework
-**/ios/Flutter/Flutter.framework
-**/ios/Flutter/Generated.xcconfig
-**/ios/Flutter/app.flx
-**/ios/Flutter/app.zip
-**/ios/Flutter/flutter_assets/
-**/ios/ServiceDefinitions.json
-**/ios/Runner/GeneratedPluginRegistrant.*
+/mobile/ios/**/*.mode1v3
+/mobile/ios/**/*.mode2v3
+/mobile/ios/**/*.moved-aside
+/mobile/ios/**/*.pbxuser
+/mobile/ios/**/*.perspectivev3
+/mobile/ios/**/*sync/
+/mobile/ios/**/.sconsign.dblite
+/mobile/ios/**/.tags*
+/mobile/ios/**/.vagrant/
+/mobile/ios/**/DerivedData/
+/mobile/ios//mobile/Icon?
+/mobile/ios/**/Pods/
+/mobile/ios/**/.symlinks/
+/mobile/ios/**/profile
+/mobile/ios/**/xcuserdata
+/mobile/ios/.generated/
+/mobile/ios/Flutter/App.framework
+/mobile/ios/Flutter/Flutter.framework
+/mobile/ios/Flutter/Generated.xcconfig
+/mobile/ios/Flutter/app.flx
+/mobile/ios/Flutter/app.zip
+/mobile/ios/Flutter/flutter_assets/
+/mobile/ios/ServiceDefinitions.json
+/mobile/ios/Runner/GeneratedPluginRegistrant.*
 
 # Exceptions to above rules.
-!**/ios/**/default.mode1v3
-!**/ios/**/default.mode2v3
-!**/ios/**/default.pbxuser
-!**/ios/**/default.perspectivev3
+!/mobile/ios/**/default.mode1v3
+!/mobile/ios/**/default.mode2v3
+!/mobile/ios/**/default.pbxuser
+!/mobile/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+/web-service/vendor
+/web-service/.idea
+/web-service/Homestead.json
+/web-service/Homestead.yaml
+/web-service/.env
