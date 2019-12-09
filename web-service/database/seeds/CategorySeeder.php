@@ -16,22 +16,28 @@ class CategorySeeder extends Seeder
                 'category' => "Niat"
             ],
             [
-                'category' => "Takbiratulihram"
+                'category' => "Takkbiratulihram"
             ],
             [
                 'category' => "Berdiri"
             ],
             [
-                'category' => "Membaca Al-fatihah"
+                'category' => "Membaca Al-Fatihah"
             ],
             [
                 'category' => "Sujud"
             ],
             [
+                'category' => "Tasyahud Akhir"
+            ],
+            [
+                'category' => "Salam"
+            ],
+            [
                 'category' => "Cara Mengangkat Tangan"
             ],
             [
-                'category' => "Meletakan Tangan Kanan di Atas Tangan Kiri"
+                'category' => "Meletakkan Tangan Kanan di Atas Tangan Kiri"
             ],
             [
                 'category' => "Memberi Isyarat dengan Telunjuk saat Tasyahud"

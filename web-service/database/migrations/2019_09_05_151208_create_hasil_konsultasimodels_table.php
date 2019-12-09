@@ -16,7 +16,7 @@ class CreateHasilKonsultasimodelsTable extends Migration
         Schema::create('hasil_konsultasi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('ciri_id');
-            $table->text('penjelasan');
+            $table->text('penjelasan')->nullable();
             $table->timestamps();
         });
     }
