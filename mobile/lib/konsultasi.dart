@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:mazhab/hasil.dart';
 import 'package:mazhab/helper/utils.dart';
+import 'package:mazhab/model/penjelasanciri_model.dart';
 import 'helper/naivebayes.dart';
 import 'package:mazhab/model/ciricategory_model.dart';
 
@@ -32,8 +33,8 @@ class _KonsultasiState extends State<Konsultasi> {
   Widget build(BuildContext context) {
     // final progress = ProgressHUD.of(context);
     return ProgressHUD(
-          child: Builder(
-                      builder: (context) => Scaffold(
+      child: Builder(
+        builder: (context) => Scaffold(
         appBar: AppBar(title: Text("Konsultasi")),
         bottomSheet: Container(
             width: double.infinity,
@@ -52,9 +53,15 @@ class _KonsultasiState extends State<Konsultasi> {
                   // setState(() => calculateprocess = true);
                   final progress = ProgressHUD.of(context);
                   progress.showWithText("Process");
-                  NaiveBayes.calculate(selectedciriid).then((res) {
+
+                  NaiveBayes.calculate(selectedciriid).then((res) async {
+                    var ids = selectedciriid.join(',');
+                    List<PenjelasanCiriModel> penjelasanciri = await PenjelasanCiriModel.getPenjelasan(ids);
+
                     progress.dismiss();
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Hasil(hasil: res)));
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Hasil(hasil: res, penjelasan: penjelasanciri)));
+
                     setState(() => selectedciriid.clear());
                   });
                 }

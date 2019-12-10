@@ -26,6 +26,7 @@ $router->put('mazhab/{id}', ['as' => 'mazhab_edit', 'uses' => 'MazhabController@
 $router->post('mazhab', ['as' => 'mazhab_add', 'uses' => 'MazhabController@addmazhab']);
 
 $router->get('ciriciri', ['as' => 'ciriciri', 'uses' => 'CiriController@getallciri']);
+$router->get('ciriciri/{ciriid}/penjelasan', ['as' => 'ciriciripenjelasan', 'uses' => 'CiriController@getpenjelasanciri']);
 $router->get('ciriciri/{id}', ['as' => 'ciriciri_id', 'uses' => 'CiriController@getallciribyid']);
 $router->post('ciriciri', ['as' => 'ciriciri_add', 'uses' => 'CiriController@addciri']);
 $router->put('ciriciri/{id}', ['as' => 'ciriciri_edit', 'uses' => 'CiriController@editciri']);

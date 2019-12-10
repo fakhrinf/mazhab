@@ -30,6 +30,7 @@ dependencies:
   flutter_tagging: ^1.1.0
   direct_select: "^1.0.0"
   flutter_progress_hud: ^1.0.2
+  flutter_html: ^0.11.0
 
 
 dev_dependencies:

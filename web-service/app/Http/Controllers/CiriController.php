@@ -148,4 +148,22 @@ class CiriController extends Controller
             return response()->json(['message' => $e->getMessage()], 400);
         }
     }
+
+    public function getpenjelasanciri($ciriid)
+    {
+        $ciri = explode(",",$ciriid);
+        foreach ($ciri as $i => $c) {
+            $dt = CiriMazhabModel::where('ciri_id', $c)->get();
+            foreach ($dt as $cr) {
+                $rs[$i]['ciriid'] = $cr->ciri_id;
+                $rs[$i]['mazhabid'] = $cr->mazhab_id;
+                $rs[$i]['ciri'] = $cr->getCiri->ciriciri;
+                $rs[$i]['mazhab'] = $cr->getMazhab->mazhab;
+                $rs[$i]['penjelasan'] = $cr->penjelasan;
+    
+            }
+         }
+
+        return response()->json(['data' => $rs], 200);
+    }
 }

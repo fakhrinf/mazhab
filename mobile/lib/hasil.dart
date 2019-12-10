@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:mazhab/model/cirimazhab_model.dart';
 import 'package:mazhab/model/mazhab_model.dart';
+import 'package:mazhab/model/penjelasanciri_model.dart';
 
 class Hasil extends StatefulWidget {
   
   final Map<dynamic,List<dynamic>> hasil;
+  final List<PenjelasanCiriModel> penjelasan;
 
-  Hasil({Key key, @required this.hasil});
+  Hasil({Key key, @required this.hasil, @required this.penjelasan});
 
   @override
   _HasilState createState() => _HasilState();
 }
 
 class _HasilState extends State<Hasil> {
+
+  List<CiriMazhabModel> cirimazhab;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(widget.penjelasan);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,21 +103,41 @@ class _HasilState extends State<Hasil> {
             Divider(height: 30, color: Colors.transparent),
             Table(
               columnWidths: {
-                0 : FlexColumnWidth(6),
-                1 : FlexColumnWidth(4),
+                0 : FlexColumnWidth(10),
+                1 : FlexColumnWidth(2),
               },
               border: TableBorder.all(color: Colors.black87, width: 1),
               children: [
                 TableRow(children: [
                   TableCell(child: Padding(padding: EdgeInsets.all(8), child: Text("Ciri-ciri"))),
                   TableCell(child: Padding(padding: EdgeInsets.all(8), child: Text("Mazhab")))
-                ])
+                ]),
               ],
+            ),
+            Table(
+              columnWidths: {
+                0 : FlexColumnWidth(10),
+                1 : FlexColumnWidth(2),
+              },
+              border: TableBorder.all(color: Colors.black87, width: 1),
+              children: widget.penjelasan.map((dt) {
+
+                return TableRow(children: [
+                  TableCell(child: Padding(padding: EdgeInsets.all(8), child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(dt.ciri),
+                      Divider(height: 20, color: Colors.black87,),
+                      Html(data: (dt.penjelasan == null) ? "-" : dt.penjelasan, defaultTextStyle: TextStyle(color: Colors.black54))
+                    ],
+                  ))),
+                  TableCell(child: Padding(padding: EdgeInsets.all(8), child: Text(dt.mazhab)))
+                ]);
+              }).toList()
             )
           ],
         ),
       ),
-      
     );
   }
 }

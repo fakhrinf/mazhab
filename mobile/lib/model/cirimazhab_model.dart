@@ -6,17 +6,20 @@ class CiriMazhabModel {
   int id;
   int ciriid;
   int mazhabid;
+  String penjelasan;
 
   CiriMazhabModel({
       this.id,
       this.ciriid,
-      this.mazhabid
+      this.mazhabid,
+      this.penjelasan
   });
 
   CiriMazhabModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     ciriid = json['ciriid'];
     mazhabid = json['mazhabid'];
+    penjelasan = (json['penjelasan'] == null || json['penjelasan'] == "") ? "" : json['penjelasan'];
   }
 
   Map<String, dynamic> toJson() {
@@ -24,6 +27,7 @@ class CiriMazhabModel {
     data['id'] = this.id;
     data['ciriid'] = this.ciriid;
     data['mazhabid'] = this.mazhabid;
+    data['penjelasan'] = this.penjelasan;
     return data;
   }
 
