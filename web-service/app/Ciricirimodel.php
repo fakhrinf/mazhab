@@ -8,4 +8,8 @@ class Ciricirimodel extends Model
 {
     //
     protected $table = "ciriciris";
+
+    function getCategory() {
+        return $this->belongsTo('App\CategoryModel', 'category_id');
+    }
 }

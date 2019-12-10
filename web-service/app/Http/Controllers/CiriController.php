@@ -154,16 +154,21 @@ class CiriController extends Controller
         $ciri = explode(",",$ciriid);
         foreach ($ciri as $i => $c) {
             $dt = CiriMazhabModel::where('ciri_id', $c)->get();
+
+            foreach ($dt as $c) {
+                $cat[$c->getCiri->getCategory->category] = [];
+            }
+
             foreach ($dt as $cr) {
                 $rs[$i]['ciriid'] = $cr->ciri_id;
                 $rs[$i]['mazhabid'] = $cr->mazhab_id;
+                $rs[$i]['category'] = $cr->getCiri->getCategory->category;
                 $rs[$i]['ciri'] = $cr->getCiri->ciriciri;
                 $rs[$i]['mazhab'] = $cr->getMazhab->mazhab;
                 $rs[$i]['penjelasan'] = $cr->penjelasan;
-    
             }
          }
 
-        return response()->json(['data' => $rs], 200);
+        return response()->json(['data' => [$rs, $cat]], 200);
     }
 }
