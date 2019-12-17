@@ -114,30 +114,52 @@ class _HasilState extends State<Hasil> {
                 ]),
               ],
             ),
-            Table(
-              columnWidths: {
-                0 : FlexColumnWidth(10),
-                1 : FlexColumnWidth(2),
-              },
-              border: TableBorder.all(color: Colors.black87, width: 1),
-              children: widget.penjelasan.map((dt) {
-
-                return TableRow(children: [
-                  TableCell(child: Padding(padding: EdgeInsets.all(8), child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(dt.ciri),
-                      Divider(height: 20, color: Colors.black87,),
-                      Html(data: (dt.penjelasan == null) ? "-" : dt.penjelasan, defaultTextStyle: TextStyle(color: Colors.black54))
-                    ],
-                  ))),
-                  TableCell(child: Padding(padding: EdgeInsets.all(8), child: Text(dt.mazhab)))
-                ]);
-              }).toList()
-            )
+            penjelasanTable()
           ],
         ),
       ),
     );
   }
+
+  Widget penjelasanTable() {
+    return Column(children: 
+      widget.penjelasan.map((pnj) {
+          return Column(
+            children: <Widget>[
+              Table(
+                border: TableBorder.all(color: Colors.black87, width: 1),
+                children: [TableRow(children: [
+                  TableCell(child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(child: Text(pnj.category, style: TextStyle(fontWeight: FontWeight.bold),)),
+                  ))])
+                ]),
+              Table(
+                columnWidths: {
+                  0 : FlexColumnWidth(10),
+                  1 : FlexColumnWidth(2),
+                },
+                border: TableBorder.all(color: Colors.black87, width: 1),
+                children:               
+                pnj.penjelasan.map((dt) {
+
+                  return TableRow(children: [
+                    TableCell(child: Padding(padding: EdgeInsets.all(8), child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(dt.ciri),
+                        Divider(height: 20, color: Colors.black87,),
+                        Html(data: (dt.penjelasan == null) ? "-" : dt.penjelasan, defaultTextStyle: TextStyle(color: Colors.black54))
+                      ],
+                    ))),
+                    TableCell(child: Padding(padding: EdgeInsets.all(8), child: Text(dt.mazhab)))
+                  ]);
+                }).toList()
+              )
+            ],
+          );
+      }).toList()
+    );
+  }
 }
+

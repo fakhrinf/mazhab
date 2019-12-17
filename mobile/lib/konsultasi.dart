@@ -60,7 +60,7 @@ class _KonsultasiState extends State<Konsultasi> {
 
                     progress.dismiss();
 
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Hasil(hasil: res, penjelasan: penjelasanciri)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Hasil(hasil: res, penjelasan: penjelasanciri,)));
 
                     setState(() => selectedciriid.clear());
                   });

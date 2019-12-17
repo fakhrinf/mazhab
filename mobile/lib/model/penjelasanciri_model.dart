@@ -3,29 +3,27 @@ import 'dart:convert' as convert;
 import 'package:mazhab/helper/api.dart';
 
 class PenjelasanCiriModel {
-  int ciriid;
-  int mazhabid;
-  String ciri;
-  String mazhab;
-  String penjelasan;
+  String category;
+  List<Penjelasan> penjelasan;
 
-  PenjelasanCiriModel({this.ciriid, this.mazhabid, this.ciri, this.mazhab, this.penjelasan});
+  PenjelasanCiriModel({this.category, this.penjelasan});
 
   PenjelasanCiriModel.fromJson(Map<String, dynamic> json) {
-    ciriid = json['ciriid'];
-    mazhabid = json['mazhabid'];
-    ciri = json['ciri'];
-    mazhab = json['mazhab'];
-    penjelasan = json['penjelasan'];
+    category = json['category'];
+    if (json['penjelasan'] != null) {
+      penjelasan = new List<Penjelasan>();
+      json['penjelasan'].forEach((v) {
+        penjelasan.add(new Penjelasan.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ciriid'] = this.ciriid;
-    data['mazhabid'] = this.mazhabid;
-    data['ciri'] = this.ciri;
-    data['mazhab'] = this.mazhab;
-    data['penjelasan'] = this.penjelasan;
+    data['category'] = this.category;
+    if (this.penjelasan != null) {
+      data['penjelasan'] = this.penjelasan.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 
@@ -45,5 +43,34 @@ class PenjelasanCiriModel {
     }else{
       throw Exception("Failed to get data, error code: ${response.statusCode}");
     }
+  }
+}
+
+
+class Penjelasan {
+  int ciriid;
+  int mazhabid;
+  String ciri;
+  String mazhab;
+  String penjelasan;
+
+  Penjelasan({this.ciriid, this.mazhabid, this.ciri, this.mazhab, this.penjelasan});
+
+  Penjelasan.fromJson(Map<String, dynamic> json) {
+    ciriid = json['ciriid'];
+    mazhabid = json['mazhabid'];
+    ciri = json['ciri'];
+    mazhab = json['mazhab'];
+    penjelasan = json['penjelasan'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['ciriid'] = this.ciriid;
+    data['mazhabid'] = this.mazhabid;
+    data['ciri'] = this.ciri;
+    data['mazhab'] = this.mazhab;
+    data['penjelasan'] = this.penjelasan;
+    return data;
   }
 }
