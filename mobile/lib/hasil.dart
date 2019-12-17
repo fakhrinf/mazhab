@@ -104,7 +104,7 @@ class _HasilState extends State<Hasil> {
             Table(
               columnWidths: {
                 0 : FlexColumnWidth(10),
-                1 : FlexColumnWidth(2),
+                1 : FlexColumnWidth(2.5),
               },
               border: TableBorder.all(color: Colors.black87, width: 1),
               children: [
@@ -137,7 +137,7 @@ class _HasilState extends State<Hasil> {
               Table(
                 columnWidths: {
                   0 : FlexColumnWidth(10),
-                  1 : FlexColumnWidth(2),
+                  1 : FlexColumnWidth(2.5),
                 },
                 border: TableBorder.all(color: Colors.black87, width: 1),
                 children:               
