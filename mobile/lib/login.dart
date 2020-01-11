@@ -203,78 +203,83 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          Container(
-            color: Colors.white,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 400,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      // Where the linear gradient begins and ends
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      // Add one stop for each color. Stops should increase from 0 to 1
-                      stops: [0.1, 0.6, 0.7],
-                      colors: [
-                        // Colors are easy thanks to Flutter's Colors class.
-                        Colors.green[200],
-                        Colors.green[500],
-                        Colors.green[600],
-                      ],
-                    ),
-                  ),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(
-                            width: 150,
-                            height: 150,
-                            child: CircleAvatar(
-                            child: Image.asset("assets/img/search.png"),
-                            backgroundColor: Colors.white,
-                            radius: 16,
-                          ),
+      body: SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Container(
+                color: Colors.white,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      height: 400,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          // Where the linear gradient begins and ends
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          // Add one stop for each color. Stops should increase from 0 to 1
+                          stops: [0.1, 0.6, 0.7],
+                          colors: [
+                            // Colors are easy thanks to Flutter's Colors class.
+                            Colors.green[200],
+                            Colors.green[500],
+                            Colors.green[600],
+                          ],
                         ),
-                        Divider(color: Colors.transparent, height: 10,),
-                        Text(_title, style: TextStyle(color: Colors.white, fontSize: 24)),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          Positioned(
-            top: 330,
-            left: MediaQuery.of(context).size.width * 0.05,
-            child: Center(
-              child: Container(
-                padding: EdgeInsets.all(16),
-                width: MediaQuery.of(context).size.width * 0.9,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(color: Colors.grey[300], blurRadius: 30, offset: Offset(0, 10)),
-                  ]
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            SizedBox(
+                                width: 150,
+                                height: 150,
+                                child: CircleAvatar(
+                                child: Image.asset("assets/img/search.png"),
+                                backgroundColor: Colors.white,
+                                radius: 16,
+                              ),
+                            ),
+                            Divider(color: Colors.transparent, height: 10,),
+                            Text(_title, style: TextStyle(color: Colors.white, fontSize: 24)),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                child: (_loginpage) ? loginForm(context) : registerForm()
               ),
-            ),
+              Positioned(
+                top: 330,
+                left: MediaQuery.of(context).size.width * 0.05,
+                child: Center(
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(color: Colors.grey[300], blurRadius: 30, offset: Offset(0, 10)),
+                      ]
+                    ),
+                    child: (_loginpage) ? loginForm(context) : registerForm()
+                  ),
+                ),
+              ),
+              // Positioned(
+              //   top: _textlinkpos,
+              //   child: Container(
+              //     child: linktext(_loginpage)
+              //   ),
+              // ),
+            ],
           ),
-          // Positioned(
-          //   top: _textlinkpos,
-          //   child: Container(
-          //     child: linktext(_loginpage)
-          //   ),
-          // ),
-        ],
+        ),
       ),
     );
   }

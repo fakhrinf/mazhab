@@ -41,9 +41,9 @@ class _AboutState extends State<About> {
                 Image.asset("assets/img/search.png"),
                 Divider(height: 10, color: Colors.transparent,),
                 Text("CEK MAZHAB APPS"),
-                Divider(height: 100, color: Colors.transparent,),
+                Divider(height: MediaQuery.of(context).size.height * 0.1, color: Colors.transparent,),
                 Text("Version: 1.0"),
-                Divider(height: 70, color: Colors.transparent,),
+                Divider(height: MediaQuery.of(context).size.height * 0.07, color: Colors.transparent,),
                 Text("Icons by:"),
                 FlatButton(
                   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
