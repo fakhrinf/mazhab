@@ -16,6 +16,7 @@ class CreateMazhabmodelsTable extends Migration
         Schema::create('mazhabs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('mazhab');
+            $table->text("biografi");
             $table->string('kode_mazhab');
             $table->timestamps();
         });

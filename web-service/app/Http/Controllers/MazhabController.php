@@ -13,11 +13,13 @@ class MazhabController extends Controller
     {
         $kode = $request->kodemazhab;
         $mazhab = $request->mazhab;
+        $biografi = $request->biografi;
 
         try {
             $data = new Mazhabmodel();
             $data->kode_mazhab = $kode;
             $data->mazhab = $mazhab;
+            $data->biografi = $biografi;
             $data->save();
 
             return response()->json(['message' => "data with id:{$data->id} added"], 200);
@@ -30,6 +32,7 @@ class MazhabController extends Controller
     {
         $kode = $request->kodemazhab;
         $mazhab = $request->mazhab;
+        $biografi = $request->biografi;
 
         try {
             $data = Mazhabmodel::find($id);
@@ -39,6 +42,7 @@ class MazhabController extends Controller
             }else{
                 $data->kode_mazhab = $kode;
                 $data->mazhab = $mazhab;
+                $data->biografi = $biografi;
                 $data->save();
 
                 return response()->json(['message' => "data with id:{$id} updated"], 200);

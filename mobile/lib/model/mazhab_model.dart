@@ -8,8 +8,9 @@ class MazhabModel {
   String kodeMazhab;
   String createdAt;
   String updatedAt;
+  String biografi;
 
-  MazhabModel({this.id, this.mazhab, this.kodeMazhab, this.createdAt, this.updatedAt});
+  MazhabModel({this.id, this.mazhab, this.kodeMazhab, this.createdAt, this.updatedAt, this.biografi});
 
   MazhabModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -17,6 +18,7 @@ class MazhabModel {
     kodeMazhab = json['kode_mazhab'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    biografi = json['biografi'];
   }
 
   Map<String, dynamic> toJson() {
@@ -26,6 +28,7 @@ class MazhabModel {
     data['kode_mazhab'] = this.kodeMazhab;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['biografi'] = this.biografi;
     return data;
   }
 
@@ -47,10 +50,11 @@ class MazhabModel {
     }
   }
 
-  static Future<String> addMazhab(String kode, String mazhab) async {
+  static Future<String> addMazhab(String kode, String mazhab, String biografi) async {
     final response = await http.post(Api.url("mazhab"), body: {
       'kodemazhab': kode,
-      'mazhab': mazhab
+      'mazhab': mazhab,
+      'biografi': biografi
     });
 
     if(response.statusCode == 200) {
@@ -61,10 +65,11 @@ class MazhabModel {
     }
   }
 
-  static Future<String> editMazhab(int id, String kode, String mazhab) async {
+  static Future<String> editMazhab(int id, String kode, String mazhab, String biografi) async {
     final response = await http.put(Api.url("mazhab/$id"), body: {
       'kodemazhab': kode,
-      'mazhab': mazhab
+      'mazhab': mazhab,
+      'biografi': biografi
     });
 
     if(response.statusCode == 200) {

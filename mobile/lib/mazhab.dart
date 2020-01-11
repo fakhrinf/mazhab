@@ -116,6 +116,7 @@ class _MazhabFormState extends State<MazhabForm> {
   final _formKey = GlobalKey<FormState>();
   String _kodemazhab;
   String _mazhab;
+  String _biografi;
 
   @override
   Widget build(BuildContext context) {
@@ -148,6 +149,16 @@ class _MazhabFormState extends State<MazhabForm> {
                   onSaved: (input) => _mazhab = input,
                 ),
                 Divider(height: 10, color: Colors.transparent),
+                TextFormField(
+                  maxLines: 5,
+                  initialValue: (widget.mazhab == null) ? null : widget.mazhab.biografi,
+                  decoration: InputDecoration(
+                    labelText: "Biografi"
+                  ),
+                  validator: (input) => (input.isEmpty) ? "Biografi is required" : null,
+                  onSaved: (input) => _biografi = input,
+                ),
+                Divider(height: 10, color: Colors.transparent),
                 Container(
                   width: double.infinity,
                   child: RaisedButton(
@@ -156,7 +167,7 @@ class _MazhabFormState extends State<MazhabForm> {
                         _formKey.currentState.save();
 
                         if(widget.mazhab == null) {
-                          MazhabModel.addMazhab(_kodemazhab, _mazhab).then((res) {
+                          MazhabModel.addMazhab(_kodemazhab, _mazhab, _biografi).then((res) {
                             Fluttertoast.showToast(msg: res);
                             Navigator.pop(context, true);
                           }).catchError((e) {
@@ -165,7 +176,7 @@ class _MazhabFormState extends State<MazhabForm> {
                             ]);
                           });
                         }else{
-                          MazhabModel.editMazhab(widget.mazhab.id, _kodemazhab, _mazhab).then((res) {
+                          MazhabModel.editMazhab(widget.mazhab.id, _kodemazhab, _mazhab, _biografi).then((res) {
                             Fluttertoast.showToast(msg: res);
                             Navigator.pop(context, true);
                           }).catchError((e) {
