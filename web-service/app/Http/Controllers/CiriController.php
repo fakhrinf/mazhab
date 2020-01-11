@@ -156,20 +156,28 @@ class CiriController extends Controller
             $dt = CiriMazhabModel::where('ciri_id', $c)->get();
 
             foreach ($dt as $ci => $cr) {
-                $rs[$ci]['ciriid'] = $cr->ciri_id;
-                $rs[$ci]['mazhabid'] = $cr->mazhab_id;
-                $rs[$ci]['category'] = $cr->getCiri->getCategory->category;
-                $rs[$ci]['ciri'] = $cr->getCiri->ciriciri;
-                $rs[$ci]['mazhab'] = $cr->getMazhab->mazhab;
-                $rs[$ci]['penjelasan'] = $cr->penjelasan;
+                $rs[$i]['ciriid'] = $cr->ciri_id;
+                $rs[$i]['mazhabid'] = $cr->mazhab_id;
+                $rs[$i]['category'] = $cr->getCiri->getCategory->category;
+                $rs[$i]['ciri'] = $cr->getCiri->ciriciri;
+                $rs[$i]['mazhab'][] = $cr->getMazhab->mazhab;
+                $cr->penjelasan = ($cr->penjelasan == null) ? "-" : $cr->penjelasan;
+                $rs[$i]['penjelasan'][] = "<strong>{$cr->getMazhab->mazhab}</strong><hr/> {$cr->penjelasan}<br/><br/>";
             }
         }
 
+        // echo "<pre>",print_r($rs),"</pre>";
+        // exit();
+
         $tmp = array();
 
-        foreach ($rs as $r) {
+        foreach ($rs as $i => $r) {
+            // echo "<pre>",print_r($rs),"</pre>";            
             $tmp[$r['category']][] = $r;
         }
+
+        // echo "<pre>",print_r($tmp),"</pre>";
+        // exit();
 
         $output = array();
 
@@ -180,6 +188,9 @@ class CiriController extends Controller
                 'penjelasan' => $rs
             );
         }
+
+        // echo "<pre>",print_r($output),"</pre>";
+        // exit();
 
         return response()->json(['data' => $output], 200);
     }

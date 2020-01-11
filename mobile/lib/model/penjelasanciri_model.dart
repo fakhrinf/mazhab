@@ -51,7 +51,9 @@ class Penjelasan {
   int ciriid;
   int mazhabid;
   String ciri;
-  String mazhab;
+  String smazhab;
+  List<String> mazhab;
+  List<String> penjelasans;
   String penjelasan;
 
   Penjelasan({this.ciriid, this.mazhabid, this.ciri, this.mazhab, this.penjelasan});
@@ -62,7 +64,15 @@ class Penjelasan {
     ciriid = json['ciriid'];
     mazhabid = json['mazhabid'];
     ciri = json['ciri'];
-    mazhab = json['mazhab'];
+    mazhab = json['mazhab'].cast<String>();
+    penjelasans = json['penjelasan'].cast<String>();
+  }
+
+  Penjelasan.fromJsonlist(Map<String, dynamic> json) {
+    ciriid = json['ciriid'];
+    mazhabid = json['mazhabid'];
+    ciri = json['ciri'];
+    smazhab = json['mazhab'];
     penjelasan = (json['penjelasan'] == null || json['penjelasan'] == "") ? "-" : json['penjelasan'];
   }
 
@@ -83,7 +93,7 @@ class Penjelasan {
       final penjelasan = convert.jsonDecode(response.body);
       List<Penjelasan> data = new List();
       penjelasan['data'].forEach((d) {
-        data.add(new Penjelasan.fromJson(d));
+        data.add(new Penjelasan.fromJsonlist(d));
       });
 
       return data;

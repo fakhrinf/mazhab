@@ -131,10 +131,13 @@ class _HasilState extends State<Hasil> {
                       children: <Widget>[
                         Text(dt.ciri),
                         Divider(height: 20, color: Colors.black87,),
-                        Html(data: (dt.penjelasan == null) ? "-" : dt.penjelasan, defaultTextStyle: TextStyle(color: Colors.black54))
+                        Column(children: dt.penjelasans.map((dt) => Html(data: dt, defaultTextStyle: TextStyle(color: Colors.black54))).toList()),
                       ],
                     ))),
-                    TableCell(child: Padding(padding: EdgeInsets.all(8), child: Text(dt.mazhab)))
+                    TableCell(child: Padding(padding: EdgeInsets.all(8), child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: dt.mazhab.map((mz) => Text("- $mz")).toList(),
+                    )))
                   ]);
                 }).toList()
               )

@@ -54,7 +54,7 @@ class _PenjelasanPageState extends State<PenjelasanPage> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: Text("Mazhab: ${listpenjelasan[i].mazhab}"),
+                    child: Text("Mazhab: ${listpenjelasan[i].smazhab}"),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
@@ -99,7 +99,7 @@ class _FormPenjelasanState extends State<FormPenjelasan> {
           child: Form(
             key: _formkey,
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-              Text("Mazhab: \n${widget.penjelsan.mazhab}"),
+              Text("Mazhab: \n${widget.penjelsan.smazhab}"),
               Divider(height: 20, color: Colors.transparent,),
               Text("Ciri-ciri: \n${widget.penjelsan.ciri}", style: TextStyle(
                 height: 1.5
