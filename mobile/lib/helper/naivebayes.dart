@@ -20,6 +20,7 @@ class NaiveBayes {
     var prfinal = new List<dynamic>();
     var ncc = new List<dynamic>();
     var colection_mazhab_id = new List<dynamic>();
+    var output = new List<OutputObj>();
     var ii = 0;
 
     if(mazhab.length != 0) {
@@ -56,7 +57,28 @@ class NaiveBayes {
       // print("FINAL: $prfinal");
     }
 
-    return {'mazhab': mazhab, 'pfinal': pfinal, 'prfinal': prfinal};
+    for (var i = 0; i < mazhab.length; i++) {
+
+      output.add(new OutputObj(mazhab: mazhab[i].mazhab, prob: pfinal[i], presentation: prfinal[i]));
+    }
+
+    print("OUTPUT: $output");
+
+    output.sort((a,b) => b.presentation.compareTo(a.presentation));
+
+    return {'mazhab': mazhab, 'pfinal': pfinal, 'prfinal': prfinal, 'output': output};
   }
 
+}
+
+class OutputObj {
+  String mazhab;
+  String prob;
+  double presentation;
+
+  OutputObj({this.mazhab, this.prob, this.presentation});
+
+  getMazhab() => this.mazhab;
+  getProbability() => this.prob;
+  getPresentation() => this.presentation;
 }
