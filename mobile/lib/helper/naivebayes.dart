@@ -59,7 +59,7 @@ class NaiveBayes {
 
     for (var i = 0; i < mazhab.length; i++) {
 
-      output.add(new OutputObj(mazhab: mazhab[i].mazhab, prob: pfinal[i], presentation: prfinal[i]));
+      output.add(new OutputObj(mazhab: mazhab[i].mazhab, prob: pfinal[i], presentation: prfinal[i], biografi: mazhab[i].biografi));
     }
 
     print("OUTPUT: $output");
@@ -74,11 +74,13 @@ class NaiveBayes {
 class OutputObj {
   String mazhab;
   String prob;
+  String biografi;
   double presentation;
 
-  OutputObj({this.mazhab, this.prob, this.presentation});
+  OutputObj({this.mazhab, this.prob, this.presentation, this.biografi});
 
   getMazhab() => this.mazhab;
+  getBiografi() => this.biografi;
   getProbability() => this.prob;
   getPresentation() => this.presentation;
 }

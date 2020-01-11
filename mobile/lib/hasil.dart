@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:mazhab/biografi.dart';
 import 'package:mazhab/model/cirimazhab_model.dart';
 import 'package:mazhab/model/mazhab_model.dart';
 import 'package:mazhab/model/penjelasanciri_model.dart';
@@ -33,6 +34,32 @@ class _HasilState extends State<Hasil> {
       body: Container(
         child: ListView(
           children: <Widget>[
+            Center(child: Column(children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text("Hasil Identifikasi", style: TextStyle(
+                  fontSize: 24
+                )),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Text("Mazhab tertinggi yang digunakan adalah", style: TextStyle(
+                  fontSize: 14,
+                )),
+              ),
+              FlatButton( 
+                shape: StadiumBorder(),
+                splashColor: Colors.black12,
+                highlightColor: Colors.transparent,
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => Biografi(mazhab: widget.hasil['output'][0].getMazhab(), biografi: widget.hasil['output'][0].getBiografi()))),
+                child: Text("Mazhab ${widget.hasil['output'][0].getMazhab()}", style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blueAccent,
+                  decoration: TextDecoration.underline
+                )),
+              )
+            ])),
             DataTable(
               columns: [
                 DataColumn(label: Text("Mazhab")),
