@@ -6,6 +6,7 @@ import 'package:mazhab/ciriciri.dart';
 import 'package:mazhab/konsultasi.dart';
 import 'package:mazhab/login.dart';
 import 'package:mazhab/mazhab.dart';
+import 'package:mazhab/penjelasan.dart';
 import 'package:mazhab/provider/mainprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -168,7 +169,7 @@ class _MainmenuState extends State<Mainmenu> {
                     color: Colors.white,
                     padding: EdgeInsets.all(16),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                    onPressed: () {},
+                    onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => PenjelasanPage())),
                     child: Row(
                       children: <Widget>[
                         Image.asset("assets/img/penjelasan.png"),

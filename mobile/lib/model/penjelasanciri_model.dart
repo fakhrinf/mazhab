@@ -56,12 +56,14 @@ class Penjelasan {
 
   Penjelasan({this.ciriid, this.mazhabid, this.ciri, this.mazhab, this.penjelasan});
 
+  setPenjelasan(String _penjelasan) => penjelasan = _penjelasan;
+
   Penjelasan.fromJson(Map<String, dynamic> json) {
     ciriid = json['ciriid'];
     mazhabid = json['mazhabid'];
     ciri = json['ciri'];
     mazhab = json['mazhab'];
-    penjelasan = json['penjelasan'];
+    penjelasan = (json['penjelasan'] == null || json['penjelasan'] == "") ? "-" : json['penjelasan'];
   }
 
   Map<String, dynamic> toJson() {
@@ -72,5 +74,36 @@ class Penjelasan {
     data['mazhab'] = this.mazhab;
     data['penjelasan'] = this.penjelasan;
     return data;
+  }
+
+  static Future<List<Penjelasan>> getAllPenjelasan() async {
+    final response = await http.get(Api.url("penjelasanciri"));
+
+    if(response.statusCode == 200) {
+      final penjelasan = convert.jsonDecode(response.body);
+      List<Penjelasan> data = new List();
+      penjelasan['data'].forEach((d) {
+        data.add(new Penjelasan.fromJson(d));
+      });
+
+      return data;
+    }else{
+      throw Exception("Failed to get penjelasan data");
+    }
+  }
+
+  static Future<String> updatePenjelasan(Penjelasan penjelasan) async {
+    final response = await http.put(Api.url("penjelasanciri"), body: {
+      "ciriid": penjelasan.ciriid.toString(),
+      "mazhabid": penjelasan.mazhabid.toString(),
+      "penjelasan": penjelasan.penjelasan
+    });
+
+    if(response.statusCode == 200) {
+      final json = convert.jsonDecode(response.body);
+      return json['message'];
+    }else{
+      throw Exception("Failed update data");
+    }
   }
 }

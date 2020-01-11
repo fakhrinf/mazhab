@@ -35,6 +35,9 @@ $router->delete('ciriciri/{id}', ['as' => 'ciriciri_delete', 'uses' => 'CiriCont
 $router->get('cirimazhab', ['as' => 'cirimazhab', 'uses' => 'CiriController@getallcirimazhab']);
 $router->get('cirimazhab/{ciriid}/{mazhabid}', ['as' => 'cirimazhab_byid', 'uses' => 'CiriController@getcirimazhabbyid']);
 
+$router->get('penjelasanciri', ['as' => 'penjelasanciri', 'uses' => 'HasilController@getallpenjelasanhasil']);
+$router->put('penjelasanciri', ['as' => 'editpenjelasan', 'uses' => 'HasilController@editpenjelasan']);
+
 $router->get('hasil', ['as' => 'hasil', 'uses' => 'HasilController@getallhasil']);
 $router->get('hasil/{id}', ['as' => 'hasil_id', 'uses' => 'HasilController@getallhasilbyid']);
 $router->post('hasil', ['as' => 'hasil_add', 'uses' => 'HasilController@addhasil']);
