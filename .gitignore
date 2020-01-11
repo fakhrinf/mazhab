@@ -28,6 +28,7 @@
 /mobile/.pub-cache/
 /mobile/.pub/
 /mobile/build/
+/mobile/lib/helper/api.dart
 
 # Android related
 /mobile/android/**/gradle-wrapper.jar
