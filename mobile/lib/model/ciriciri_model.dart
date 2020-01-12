@@ -9,8 +9,9 @@ class CiriciriModel {
   String ciriciri;
   String kodeCiriciri;
   int categoryId;
-  Null createdAt;
-  Null updatedAt;
+  List<int> mazhab;
+  String createdAt;
+  String updatedAt;
 
   CiriciriModel(
       {this.id,
@@ -27,6 +28,7 @@ class CiriciriModel {
     categoryId = json['category_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    mazhab = json['mazhab'].cast<int>();
   }
 
   Map<String, dynamic> toJson() {
@@ -37,6 +39,7 @@ class CiriciriModel {
     data['category_id'] = this.categoryId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['mazhab'] = this.mazhab;
     return data;
   }
 

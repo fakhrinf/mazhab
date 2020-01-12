@@ -1,5 +1,6 @@
 import 'package:direct_select/direct_select.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_tagging/flutter_tagging.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mazhab/helper/tagsearch.dart';
@@ -73,7 +74,7 @@ class _CiriciriState extends State<Ciriciri> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: ()  async {
-          final refresh = await Navigator.push(context, MaterialPageRoute(builder: (context) => CiriciriForm(title: "Tambah Ciri-ciri", mazhablist: listMazhab, categorylist: listCategory)));
+          final refresh = await Navigator.push(context, MaterialPageRoute(builder: (context) => CiriFormBuilder(title: "Tambah Ciri-Ciri", mazhablist: listMazhab, categorylist: listCategory)));
 
           if(refresh) {
             getDataCiri();
@@ -118,7 +119,7 @@ class _CiriciriState extends State<Ciriciri> {
               subtitle: Text("${listciri[i].kodeCiriciri}"),
               trailing: Icon(Icons.arrow_right),
               onTap: () async {
-                final refresh = await Navigator.push(context, MaterialPageRoute(builder: (context) => CiriciriForm(title: "Edit Ciri-ciri", mazhablist: listMazhab, categorylist: listCategory)));
+                final refresh = await Navigator.push(context, MaterialPageRoute(builder: (context) => CiriFormBuilder(title: "Edit Ciri-ciri", mazhablist: listMazhab, categorylist: listCategory, ciricirimodel: listciri[i])));
 
                 if(refresh) {
                   getDataCiri();
@@ -246,10 +247,10 @@ class _CiriciriFormState extends State<CiriciriForm> {
                     setState(() {
                       categoryindex = index;
                       _categoryid = widget.categorylist[categoryindex].id;
+                      print(widget.categorylist[categoryindex].category);
                     });
                   },
-                ),
-                
+                ),                
                 Divider(height: 10, color: Colors.transparent),
                 FlutterTagging(
                   textFieldDecoration: InputDecoration(
@@ -307,6 +308,117 @@ class _CiriciriFormState extends State<CiriciriForm> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class CiriFormBuilder extends StatefulWidget {
+  
+  final CiriciriModel ciricirimodel;
+  final String title;
+  final List<MazhabModel> mazhablist;
+  final List<CategoryModel> categorylist;
+
+  CiriFormBuilder({Key key, this.title, this.ciricirimodel, this.mazhablist, this.categorylist});
+
+  @override
+  _CiriFormBuilderState createState() => _CiriFormBuilderState();
+}
+
+class _CiriFormBuilderState extends State<CiriFormBuilder> {
+  
+  final GlobalKey<FormBuilderState> _fbKey = GlobalKey<FormBuilderState>();
+  
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () {
+        Future.value(false);
+        Navigator.pop(context, false);
+      },
+      child: Scaffold(
+        appBar: AppBar(title: Text(widget.title), leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context, false),
+        )),
+        body: SingleChildScrollView(
+          child: Column(children: <Widget>[
+            FormBuilder(
+              key: _fbKey,
+              autovalidate: true,
+              initialValue: {
+                'kodeciri': (widget.ciricirimodel == null) ? null : widget.ciricirimodel.kodeCiriciri,
+                'ciriciri': (widget.ciricirimodel == null) ? null : widget.ciricirimodel.ciriciri,
+                'kategori': (widget.ciricirimodel == null) ? null : widget.ciricirimodel.categoryId,
+                'mazhab': (widget.ciricirimodel == null) ? null : widget.ciricirimodel.mazhab
+              },
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
+                    child: FormBuilderTextField(
+                      attribute: "kodeciri",
+                      decoration: InputDecoration(labelText: "Kode Ciri"),
+                      validators: [
+                        FormBuilderValidators.required(errorText: "Kode ciri tidak boleh kosong!"),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
+                    child: FormBuilderTextField(
+                      attribute: "ciriciri",
+                      decoration: InputDecoration(labelText: "Ciri-ciri"),
+                      validators: [
+                        FormBuilderValidators.required(errorText: "Ciri ciri tidak boleh kosong!"),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
+                    child: FormBuilderDropdown(
+                      attribute: "kategori",
+                      decoration: InputDecoration(labelText: "Kategori"),
+                      // initialValue: 'Male',
+                      hint: Text('Pilih kategori'),
+                      validators: [FormBuilderValidators.required()],
+                      items: widget.categorylist.map((cat) => DropdownMenuItem(
+                        value: cat.id,
+                        child: Text(cat.category),
+                      )).toList()
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 5),
+                    child: FormBuilderCheckboxList(
+                      decoration:
+                      InputDecoration(labelText: "Mazhab"),
+                      attribute: "mazhab",
+                      options: widget.mazhablist.map((mazhab) => FormBuilderFieldOption(value: mazhab.id, label: mazhab.mazhab)).toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: RaisedButton(
+                color: Colors.green,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Text("SIMPAN", style: TextStyle(color: Colors.white)),
+                  width: double.infinity,
+                ),
+                onPressed: () {
+                  if(_fbKey.currentState.saveAndValidate()) {
+                    print(_fbKey.currentState.value);
+                  }
+                },
+              ),
+            )
+          ])
         ),
       ),
     );

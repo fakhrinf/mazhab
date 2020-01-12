@@ -106,7 +106,18 @@ class CiriController extends Controller
         try {
             
             $data = CiriciriModel::all();
-            return response()->json(['data' => $data], 200);
+            foreach ($data as $i => $ciri) {
+                $res[$i] = $ciri;
+                foreach ($ciri->getMazhab as $mi => $mid) {
+                    $mz[] = $mid->mazhab_id;
+                }
+                $res[$i]['mazhab'] = array_unique($mz);
+                unset($mz);
+            }
+
+            // echo "<pre>",print_r($data), "</pre>";
+            // exit();
+            return response()->json(['data' => $res], 200);
 
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 400);
