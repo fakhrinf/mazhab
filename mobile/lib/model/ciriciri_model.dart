@@ -62,35 +62,32 @@ class CiriciriModel {
     }
   }
 
-  static Future<String> addCiriCiri(String code, String ciri, int categoryid, String mazhabid) async {
-    final response = await http.post(Api.url("ciriciri"), body: {
-      "code" : code,
-      "ciri" : ciri,
-      "categoryid" : categoryid,
-      "mazhabid" : mazhabid
-    });
+  static Future<String> addCiriCiri(Map<String, dynamic> data) async {
+    final response = await http.post(Api.url("ciriciri"), body: data);
 
     if(response.statusCode == 200) {
       final json = convert.jsonDecode(response.body);
       return json['message'];      
     }else{
-      throw Exception("Failed to add data, error code: ${response.statusCode}");
+      throw Exception("Failed to add data, error code: ${response.statusCode}, body: ${response.body}");
     }
   }
 
-  static Future<String> editCiriCiri(int ciriid,String code, String ciri, int categoryid, String mazhabid) async {
+  static Future<String> editCiriCiri(Map<String, dynamic> data) async {
+    String ciriid = data['ciriid'];
+    print(ciriid);
     final response = await http.put(Api.url("ciriciri/$ciriid"), body: {
-      "code" : code,
-      "ciri" : ciri,
-      "categoryid" : categoryid,
-      "mazhabid" : mazhabid
+      "kodeciri" : data['kodeciri'],
+      "ciriciri" : data['ciriciri'],
+      "kategori" : data['kategori'],
+      "mazhab" : data['mazhab']
     });
 
     if(response.statusCode == 200) {
       final json = convert.jsonDecode(response.body);
       return json['message'];      
     }else{
-      throw Exception("Failed to edit data, error code: ${response.statusCode}");
+      throw Exception("Failed to edit data, error code: ${response.statusCode}, body: ${response.body}");
     }
   }
 

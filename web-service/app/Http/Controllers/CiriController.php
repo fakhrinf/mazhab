@@ -14,10 +14,10 @@ class CiriController extends Controller
     {
         try {
 
-            $kode = $request->kode;
-            $ciri = $request->ciri;
-            $categoryid = $request->categoryid;
-            $mazhabid = $request->mazhabid;
+            $kode = $request->kodeciri;
+            $ciri = $request->ciriciri;
+            $categoryid = $request->kategori;
+            $mazhabid = $request->mazhab;
             $mazhabid = explode(',', $mazhabid);
 
             $data = new CiriciriModel();
@@ -48,10 +48,10 @@ class CiriController extends Controller
     {
         try {
 
-            $kode = $request->kode;
-            $ciri = $request->ciri;
-            $categoryid = $request->categoryid;
-            $mazhabid = $request->mazhabid;
+            $kode = $request->kodeciri;
+            $ciri = $request->ciriciri;
+            $categoryid = $request->kategori;
+            $mazhabid = $request->mazhab;
             $mazhabid = explode(',', $mazhabid);
 
             $data = CiriciriModel::find($id);
@@ -61,7 +61,7 @@ class CiriController extends Controller
             }else{
                 $data->ciriciri = $ciri;
                 $data->kode_ciriciri = $kode;
-                $data->categoryid = $categoryid;
+                $data->category_id = $categoryid;
     
                 $data->save();
 
@@ -105,7 +105,7 @@ class CiriController extends Controller
     {
         try {
             
-            $data = CiriciriModel::all();
+            $data = CiriciriModel::orderBy('id','desc')->get();
             foreach ($data as $i => $ciri) {
                 $res[$i] = $ciri;
                 foreach ($ciri->getMazhab as $mi => $mid) {

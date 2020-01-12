@@ -281,23 +281,23 @@ class _CiriciriFormState extends State<CiriciriForm> {
                         _formKey.currentState.save();
 
                         if(widget.ciriciri == null){
-                          CiriciriModel.addCiriCiri(_kodeciri, _ciri, _categoryid, _mazhabid).then((res) {
-                            Fluttertoast.showToast(msg: res);
-                            Navigator.pop(context, true);
-                          }).catchError((e) {
-                            Utils.alert(context, "Warning!", e.toString(), [
-                              FlatButton(child: Text("Ok"), onPressed: () => Navigator.pop(context))
-                            ]);
-                          });
+                          // CiriciriModel.addCiriCiri(_kodeciri, _ciri, _categoryid, _mazhabid).then((res) {
+                          //   Fluttertoast.showToast(msg: res);
+                          //   Navigator.pop(context, true);
+                          // }).catchError((e) {
+                          //   Utils.alert(context, "Warning!", e.toString(), [
+                          //     FlatButton(child: Text("Ok"), onPressed: () => Navigator.pop(context))
+                          //   ]);
+                          // });
                         }else{
-                          CiriciriModel.editCiriCiri(widget.ciriciri.id, _kodeciri, _ciri, _categoryid, _mazhabid).then((res) {
-                            Fluttertoast.showToast(msg: res);
-                            Navigator.pop(context, true);
-                          }).catchError((e) {
-                            Utils.alert(context, "Warning!", e.toString(), [
-                              FlatButton(child: Text("Ok"), onPressed: () => Navigator.pop(context))
-                            ]);
-                          });
+                          // CiriciriModel.editCiriCiri(widget.ciriciri.id, _kodeciri, _ciri, _categoryid, _mazhabid).then((res) {
+                          //   Fluttertoast.showToast(msg: res);
+                          //   Navigator.pop(context, true);
+                          // }).catchError((e) {
+                          //   Utils.alert(context, "Warning!", e.toString(), [
+                          //     FlatButton(child: Text("Ok"), onPressed: () => Navigator.pop(context))
+                          //   ]);
+                          // });
                         }
                       }
                     },
@@ -413,7 +413,36 @@ class _CiriFormBuilderState extends State<CiriFormBuilder> {
                 ),
                 onPressed: () {
                   if(_fbKey.currentState.saveAndValidate()) {
-                    print(_fbKey.currentState.value);
+                    // print(_fbKey.currentState.value);
+
+                    Map<String, dynamic> formdata = ({
+                      "ciriid": (widget.ciricirimodel != null) ? widget.ciricirimodel.id.toString() : "",
+                      "kodeciri": _fbKey.currentState.value['kodeciri'].toString(),
+                      "ciriciri": _fbKey.currentState.value['ciriciri'].toString(),
+                      "kategori": _fbKey.currentState.value['kategori'].toString(),
+                      "mazhab": _fbKey.currentState.value['mazhab'].join(","),
+                    });
+
+                    // print(formdata);
+                    if(widget.ciricirimodel != null) {
+                      CiriciriModel.editCiriCiri(formdata).then((res) {
+                        Fluttertoast.showToast(msg: res);
+                        Navigator.pop(context, true);
+                      }).catchError((e) {
+                        Utils.alert(context, "Error", e.toString(), [
+                          FlatButton(child: Text("Ok"), onPressed: () => Navigator.pop(context))
+                        ]);
+                      });
+                    }else{
+                      CiriciriModel.addCiriCiri(formdata).then((res) {
+                        Fluttertoast.showToast(msg: res);
+                        Navigator.pop(context, true);
+                      }).catchError((e) {
+                        Utils.alert(context, "Error", e.toString(), [
+                          FlatButton(child: Text("Ok"), onPressed: () => Navigator.pop(context))
+                        ]);
+                      });
+                    }
                   }
                 },
               ),
