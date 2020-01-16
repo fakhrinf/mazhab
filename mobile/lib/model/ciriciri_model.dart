@@ -28,7 +28,7 @@ class CiriciriModel {
     categoryId = json['category_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    mazhab = json['mazhab'].cast<int>();
+    mazhab = (json['mazhab'] != null) ? json['mazhab'].cast<int>() : [0];
   }
 
   Map<String, dynamic> toJson() {
